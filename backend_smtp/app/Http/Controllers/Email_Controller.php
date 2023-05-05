@@ -15,6 +15,11 @@ class Email_Controller extends Controller
     }
 
     public function send_email(Request $req){
+        $validated = $req->validate([
+            'subject' => 'required|max:50',
+            'body' => 'required',
+            'receiver_email'=>'required'
+        ]);
         $users = DB::table('users')->orderBy('id','desc')->first();
         $subject=$req->subject;
         $body=$req->body;
@@ -47,6 +52,10 @@ class Email_Controller extends Controller
     }
 
     public function login(Request $req){
+        $validated = $req->validate([
+            'sender_email'=>'required|max:100',
+            'password'=>'required',
+        ]);
         $sender_email=$req->sender_email;
         $password= $req->password;
         DB::table('users')->insert([

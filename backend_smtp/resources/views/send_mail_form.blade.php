@@ -10,25 +10,57 @@
 </head>
 <body>
 
-    <h1 class="text-center py-5">Welcome to SMTP server</h1>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">SMTP Server</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/logout"><button class="btn btn-primary">Logout</button></a>
+          </li>
+  
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+    <h1 class="text-center py-5 fw-bold text-uppercase">Welcome to SMTP server</h1>
 @if (isset($data))
- <h2>{{$data['msg']}}</h2>
- @endif 
-   
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <h3 class='text-uppercase'>{{$data['msg']}}</h3>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 
-    <div class="">
+{{-- <div class="alert alert-primary" role="alert">
+  <h2 class='text-uppercase'>{{$data['msg']}}</h2> --}}
+</div>
+
+ @endif 
+
+ @if ($errors->any())
+ <div class="text-danger">
+  <ul>
+      @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+      @endforeach
+  </ul>
+</div>
+@endif
+
+   <div class="mx-5">
+
+
         <form action='send_mail_view' method="POST" enctype="multipart/form-data">
             @csrf
-            {{-- <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Sender email</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='sender_email'>
-              </div>
+  
 
-              <label for="exampleInputEmail1" class="form-label">Password</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='password'>
-            </div> --}}
-
-            <div class="mb-3">
+            <div class="mb-3 ">
                 <label for="exampleInputEmail1" class="form-label">Receiver email</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='receiver_email'>
               </div>
@@ -44,10 +76,9 @@
             <div class="mb-3">
                 <input type="file" name="myfile" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Send email</button>
           </form>
-<br> <br>
-<a href="/logout"><button class="btn btn-primary">Logout</button></a>
+
 {{-- 
 <button type="button" class="btn btn-primary" href="/logout"> Logout </button> --}}
 

@@ -14,5 +14,5 @@ for email in emails:
     attach = email.attachments
     for attachment in attach:
         print("Attachment filename:", attachment[0])
-        print("Attachment content:", attachment[1])
+       # print("Attachment content:", attachment[1])
     

@@ -66,6 +66,7 @@ def receive():
         my_list=[]
         password=request.form['password']
         email=request.form['email']
+    
         server=easyimap.connect('imap.gmail.com',email,password)
 
         emails = server.listup(limit=3)
